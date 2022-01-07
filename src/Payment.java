@@ -25,7 +25,7 @@ public class Payment {
         }
     }
 
-    public void showPayment(){
+    public void showAllPayment(){
         try{
             database.showPayment();
         }

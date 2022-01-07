@@ -46,7 +46,7 @@ public class Menu {
                             customerMenu();
                             break;
                         case 3:
-                            //destinationMenu();
+                            destinationMenu();
                             break;
                         case 4:
                             //roomMenu();
@@ -111,13 +111,10 @@ public class Menu {
                     default:
                         break;
                 }
-
             } catch (Exception e){
                 e.printStackTrace();
             }
-
         }
-
     }
 
     public void customerMenu(){
@@ -186,13 +183,59 @@ public class Menu {
                         paymentMenu();
                         break;
                     case 3:
-                        payment.showPayment();
+                        payment.showAllPayment();
                         paymentMenu();
                         break;
                     case 4:
                         menuOptions();
                         break;
                     case 5:
+                        running = false;
+                        System.out.println("Application is closing...");
+                        System.exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void destinationMenu(){
+        boolean running = true;
+        choice = Dialog.dialog("Logged in as Admin." + "\n" +
+                "(1) Show all destinations." + "\n" +
+                "(2) Order destinations by highest rating." + "\n" +
+                "(3) Order destinations by distance to centre." + "\n" +
+                "(4) Order destinations by distance to beach." + "\n" +
+                "(5) Back to main menu." + "\n" +
+                "(6) Exit." + "\n", 1, 6);
+
+        while (running){
+            try{
+                switch(choice){
+                    case 1:
+                        destination.searchDestination();
+                        destinationMenu();
+                        break;
+                    case 2:
+                        destination.ratingDestination();
+                        destinationMenu();
+                        break;
+                    case 3:
+                        destination.centreDestination();
+                        destinationMenu();
+                        break;
+                    case 4:
+                        destination.beachDestination();
+                        destinationMenu();
+                        break;
+                    case 5:
+                        menuOptions();
+                        break;
+                    case 6:
                         running = false;
                         System.out.println("Application is closing...");
                         System.exit(0);

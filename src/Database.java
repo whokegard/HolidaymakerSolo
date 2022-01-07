@@ -158,6 +158,129 @@ public class Database {
         return false;
     }
 
+    public boolean showDestination() {
+        try {
+            statement = connection.prepareStatement("SELECT * FROM destinations");
+            try {
+                resultSet = statement.executeQuery();
+            } catch (SQLException e) {
+                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
+            }
+            while (resultSet.next()) {
+                String destination =
+                        "------------------------------" + "\n" +
+                                "Destination ID: " + resultSet.getString("id") + "\n" +
+                                "City: " + resultSet.getString("city") + "\n" +
+                                "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
+                                "Restaurant: " + resultSet.getString("restaurant") + "\n" +
+                                "Kids club: " + resultSet.getString("kids_club") + "\n" +
+                                "Entertainment: " + resultSet.getString("entertainment") + "\n" +
+                                "Rating: " + resultSet.getString("rating") + "\n" +
+                                "Distance centre: " + resultSet.getString("distance_centre") + "\n" +
+                                "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
+                                "Amount of rooms: " + resultSet.getString("number_of_rooms") + "\n" +
+                                "------------------------------" + "\n";
+                System.out.println(destination);
+            }
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean showRatingDestination() {
+        try {
+            statement = connection.prepareStatement("SELECT * FROM destinations ORDER BY Rating DESC");
+            try {
+                resultSet = statement.executeQuery();
+            } catch (SQLException e) {
+                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
+            }
+            while (resultSet.next()) {
+                String destination =
+                        "------------------------------" + "\n" +
+                                "Destination ID: " + resultSet.getString("id") + "\n" +
+                                "City: " + resultSet.getString("city") + "\n" +
+                                "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
+                                "Restaurant: " + resultSet.getString("restaurant") + "\n" +
+                                "Kids club: " + resultSet.getString("kids_club") + "\n" +
+                                "Entertainment: " + resultSet.getString("entertainment") + "\n" +
+                                "Rating: " + resultSet.getString("rating") + "\n" +
+                                "Distance centre: " + resultSet.getString("distance_centre") + "\n" +
+                                "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
+                                "Amount of rooms: " + resultSet.getString("number_of_rooms") + "\n" +
+                                "------------------------------" + "\n";
+                System.out.println(destination);
+            }
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean showCentreDestination() {
+        try {
+            statement = connection.prepareStatement("SELECT * FROM destinations ORDER BY distance_centre DESC");
+            try {
+                resultSet = statement.executeQuery();
+            } catch (SQLException e) {
+                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
+            }
+            while (resultSet.next()) {
+                String destination =
+                        "------------------------------" + "\n" +
+                                "Destination ID: " + resultSet.getString("id") + "\n" +
+                                "City: " + resultSet.getString("city") + "\n" +
+                                "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
+                                "Restaurant: " + resultSet.getString("restaurant") + "\n" +
+                                "Kids club: " + resultSet.getString("kids_club") + "\n" +
+                                "Entertainment: " + resultSet.getString("entertainment") + "\n" +
+                                "Rating: " + resultSet.getString("rating") + "\n" +
+                                "Distance centre: " + resultSet.getString("distance_centre") + "\n" +
+                                "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
+                                "Amount of rooms: " + resultSet.getString("number_of_rooms") + "\n" +
+                                "------------------------------" + "\n";
+                System.out.println(destination);
+            }
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean showBeachDestination() {
+        try {
+            statement = connection.prepareStatement("SELECT * FROM destinations ORDER BY distance_beach DESC");
+            try {
+                resultSet = statement.executeQuery();
+            } catch (SQLException e) {
+                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
+            }
+            while (resultSet.next()) {
+                String destination =
+                        "------------------------------" + "\n" +
+                                "Destination ID: " + resultSet.getString("id") + "\n" +
+                                "City: " + resultSet.getString("city") + "\n" +
+                                "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
+                                "Restaurant: " + resultSet.getString("restaurant") + "\n" +
+                                "Kids club: " + resultSet.getString("kids_club") + "\n" +
+                                "Entertainment: " + resultSet.getString("entertainment") + "\n" +
+                                "Rating: " + resultSet.getString("rating") + "\n" +
+                                "Distance centre: " + resultSet.getString("distance_centre") + "\n" +
+                                "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
+                                "Amount of rooms: " + resultSet.getString("number_of_rooms") + "\n" +
+                                "------------------------------" + "\n";
+                System.out.println(destination);
+            }
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
     public void guestBooking(int guests_id, int room_id, int additional_choices_id, int booked_dates_id, int total_guests) {
         try {
