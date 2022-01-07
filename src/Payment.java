@@ -15,4 +15,14 @@ public class Payment {
             e.printStackTrace();
         }
     }
+
+    public void registerPayment(){
+        try{
+            database.newPayment();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

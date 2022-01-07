@@ -25,7 +25,6 @@ public class Customer {
             String phonenumber = Dialog.dialogString("Phone number?");
             String birthdate = Dialog.dialogString("Birthdate? (YYYY-MM-DD))");
             database.newCustomer(first_name, last_name, email, phonenumber, birthdate);
-            database.getCustomerId(first_name, last_name, email, phonenumber, birthdate);
         }
         catch(Exception e) {
             e.printStackTrace();

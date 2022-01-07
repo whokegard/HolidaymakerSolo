@@ -160,7 +160,6 @@ public class Menu {
                     default:
                         break;
                 }
-
             } catch (Exception e){
                 e.printStackTrace();
             }
@@ -171,8 +170,9 @@ public class Menu {
         boolean running = true;
         choice = Dialog.dialog("Logged in as Admin." + "\n" +
                 "(1) Search payment." + "\n" +
-                "(2) Main menu." + "\n" +
-                "(3) Exit." + "\n", 1, 3);
+                "(2) Register payments." + "\n" +
+                "(3) Main menu." + "\n" +
+                "(4) Exit." + "\n", 1, 4);
         while (running){
             try{
                 switch(choice){
@@ -181,9 +181,13 @@ public class Menu {
                         paymentMenu();
                         break;
                     case 2:
-                        menuOptions();
+                        payment.registerPayment();
+                        paymentMenu();
                         break;
                     case 3:
+                        menuOptions();
+                        break;
+                    case 4:
                         running = false;
                         System.out.println("Application is closing...");
                         System.exit(0);

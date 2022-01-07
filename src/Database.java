@@ -95,42 +95,44 @@ public class Database {
             statement.setString(4, phonenumber);
             statement.setString(5, birthdate);
             System.out.println("New customer " + first_name + " " + last_name + " added. " + "\n");
-            try {
-                statement.executeUpdate();
-            } catch (SQLException e) {
-                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            statement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-    }
-
-    public boolean getCustomerId(String first_name, String last_name, String email, String phonenumber, String birthdate) {
-        try {
-            statement = connection.prepareStatement("SELECT id FROM guest_information WHERE first_name = ? AND last_name = ? AND email = ? AND phonenumber = ? AND birthdate = ?; ");
-            statement.setString(1, first_name);
-            statement.setString(2, last_name);
-            statement.setString(3, email);
-            statement.setString(4, phonenumber);
-            statement.setString(5, birthdate);
             try {
+                statement = connection.prepareStatement("SELECT id FROM guest_information WHERE first_name = ? AND last_name = ? AND email = ? AND phonenumber = ? AND birthdate = ?; ");
+                statement.setString(1, first_name);
+                statement.setString(2, last_name);
+                statement.setString(3, email);
+                statement.setString(4, phonenumber);
+                statement.setString(5, birthdate);
                 resultSet = statement.executeQuery();
-            } catch (SQLException e) {
-                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
-            }
-            while (resultSet.next()) {
                 String customer_id =
                         "------------------------------" + "\n" +
                                 "Customer ID: " + resultSet.getString("id") + "\n" +
                                 "------------------------------" + "\n";
                 System.out.println(customer_id);
-            }
-            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void newPayment() {
+        try {
+            statement = connection.prepareStatement("DELETE FROM payments;");
+            statement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return false;
+        try {
+            statement = connection.prepareStatement("INSERT INTO payments (book_id, full_name, total_price) SELECT book_id, full_name, total_price FROM total_price_working");
+            System.out.println("Payments updated." + "\n");
+            statement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
+
 
     public void guestBooking(int guests_id, int room_id, int additional_choices_id, int booked_dates_id, int total_guests) {
         try {
