@@ -370,13 +370,48 @@ public class Database {
                                 "Entertainment: " + resultSet.getString("entertainment") + "\n" +
                                 "------------------------------" + "\n";
                 System.out.println(rooms);
-
             }
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public void searchRoomPrice(int price) {
+        try {
+            statement = connection.prepareStatement("SELECT * FROM all_rooms WHERE price_per_night <= ? ORDER BY price_per_night DESC");
+            statement.setInt(1, price);
+            statement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
+            statement = connection.prepareStatement("SELECT * FROM all_rooms WHERE price_per_night <= ? ORDER BY price_per_night DESC ");
+            statement.setInt(1, price);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+            String rooms =
+                    "------------------------------" + "\n" +
+                            "Room number: " + resultSet.getString("Room_number") + "\n" +
+                            "City: " + resultSet.getString("city") + "\n" +
+                            "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
+                            "Rating: " + resultSet.getString("rating") + "\n" +
+                            "Distance centrum: " + resultSet.getString("distance_centrum") + "\n" +
+                            "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
+                            "Room type: " + resultSet.getString("room_type") + "\n" +
+                            "Maximum guests: " + resultSet.getString("maximum_guests") + "\n" +
+                            "Restaurant: " + resultSet.getString("Restaurant") + "\n" +
+                            "Kids club: " + resultSet.getString("kids_club") + "\n" +
+                            "Pool: " + resultSet.getString("pool") + "\n" +
+                            "Entertainment: " + resultSet.getString("entertainment") + "\n" +
+                            "Price per night: " + resultSet.getString("price_per_night") + "\n" +
+                            "------------------------------" + "\n";
+            System.out.println(rooms);
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void changeCustomer(int id, String first_name, String last_name, String email, String phonenumber, String birthdate) {

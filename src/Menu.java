@@ -7,6 +7,7 @@ public class Menu {
     private Customer customer = new Customer();
     private Destination destination = new Destination();
     private Payment payment = new Payment();
+    private Room room = new Room();
 
     public Menu(){
         new Database();
@@ -49,7 +50,7 @@ public class Menu {
                             destinationMenu();
                             break;
                         case 4:
-                            //roomMenu();
+                            roomMenu();
                             break;
                         case 5:
                             paymentMenu();
@@ -236,6 +237,42 @@ public class Menu {
                         menuOptions();
                         break;
                     case 6:
+                        running = false;
+                        System.out.println("Application is closing...");
+                        System.exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void roomMenu(){
+        boolean running = true;
+        choice = Dialog.dialog("Logged in as Admin." + "\n" +
+                "(1) Show all rooms." + "\n" +
+                "(2) Search room by max price." + "\n" +
+                "(3) Back to main menu." + "\n" +
+                "(4) Exit." + "\n", 1, 4);
+
+        while (running){
+            try{
+                switch(choice){
+                    case 1:
+                        room.showAllRooms();
+                        roomMenu();
+                        break;
+                    case 2:
+                        room.roomPrice();
+                        roomMenu();
+                        break;
+                    case 3:
+                        menuOptions();
+                        break;
+                    case 4:
                         running = false;
                         System.out.println("Application is closing...");
                         System.exit(0);
