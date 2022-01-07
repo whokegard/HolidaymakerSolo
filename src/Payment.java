@@ -25,4 +25,13 @@ public class Payment {
         }
     }
 
+    public void showPayment(){
+        try{
+            database.showPayment();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -133,6 +133,31 @@ public class Database {
         }
     }
 
+    public boolean showPayment() {
+        try {
+            statement = connection.prepareStatement("SELECT * FROM payments");
+            try {
+                resultSet = statement.executeQuery();
+            } catch (SQLException e) {
+                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
+            }
+            while (resultSet.next()) {
+                String payments =
+                        "------------------------------" + "\n" +
+                                "Payment ID: " + resultSet.getString("id") + "\n" +
+                                "Booking ID: " + resultSet.getString("book_id") + "\n" +
+                                "Full name: " + resultSet.getString("full_name") + "\n" +
+                                "Total price: " + resultSet.getString("total_price") + "\n" +
+                                "------------------------------" + "\n";
+                System.out.println(payments);
+            }
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
 
     public void guestBooking(int guests_id, int room_id, int additional_choices_id, int booked_dates_id, int total_guests) {
         try {

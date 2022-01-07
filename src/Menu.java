@@ -171,8 +171,9 @@ public class Menu {
         choice = Dialog.dialog("Logged in as Admin." + "\n" +
                 "(1) Search payment." + "\n" +
                 "(2) Register payments." + "\n" +
-                "(3) Main menu." + "\n" +
-                "(4) Exit." + "\n", 1, 4);
+                "(3) Show all payments." + "\n" +
+                "(4) Main menu." + "\n" +
+                "(5) Exit." + "\n", 1, 5);
         while (running){
             try{
                 switch(choice){
@@ -185,9 +186,13 @@ public class Menu {
                         paymentMenu();
                         break;
                     case 3:
-                        menuOptions();
+                        payment.showPayment();
+                        paymentMenu();
                         break;
                     case 4:
+                        menuOptions();
+                        break;
+                    case 5:
                         running = false;
                         System.out.println("Application is closing...");
                         System.exit(0);
