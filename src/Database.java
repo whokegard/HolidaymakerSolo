@@ -378,20 +378,14 @@ public class Database {
         return false;
     }
 
-    public void searchRoomPrice(int price) {
+    public void searchRoomPrice(int price_per_night) {
         try {
             statement = connection.prepareStatement("SELECT * FROM all_rooms WHERE price_per_night <= ? ORDER BY price_per_night DESC");
-            statement.setInt(1, price);
-            statement.executeUpdate();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        try {
-            statement = connection.prepareStatement("SELECT * FROM all_rooms WHERE price_per_night <= ? ORDER BY price_per_night DESC ");
-            statement.setInt(1, price);
+            statement.setInt(1, price_per_night);
+            statement.executeQuery();
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-            String rooms =
+            String roomPrice =
                     "------------------------------" + "\n" +
                             "Room number: " + resultSet.getString("Room_number") + "\n" +
                             "City: " + resultSet.getString("city") + "\n" +
@@ -407,7 +401,7 @@ public class Database {
                             "Entertainment: " + resultSet.getString("entertainment") + "\n" +
                             "Price per night: " + resultSet.getString("price_per_night") + "\n" +
                             "------------------------------" + "\n";
-            System.out.println(rooms);
+            System.out.println(roomPrice);
         }
         } catch (Exception e) {
             e.printStackTrace();
