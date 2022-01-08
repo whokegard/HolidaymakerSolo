@@ -4,6 +4,8 @@ public class Database {
     private Connection connection = null;
     private PreparedStatement statement;
     private ResultSet resultSet;
+    public static final String TEXT_GREEN = "\u001B[32m";
+    public static final String TEXT_RESET = "\u001B[0m";
 
 
     public Database() {
@@ -109,7 +111,7 @@ public class Database {
                 resultSet = statement.executeQuery();
                 String customer_id =
                         "------------------------------" + "\n" +
-                                "Customer ID: " + resultSet.getString("id") + "\n" +
+                                "Customer ID: " + TEXT_GREEN + resultSet.getString("id") + TEXT_RESET + "\n" +
                                 "------------------------------" + "\n";
                 System.out.println(customer_id);
         } catch (Exception e) {
@@ -485,7 +487,7 @@ public class Database {
         resultSet = statement.executeQuery();
             String booked_id =
                     "------------------------------" + "\n" +
-                            "Booking ID: " + resultSet.getString("booked_id") + "\n" +
+                            "Booking ID: " + TEXT_GREEN + resultSet.getString("booked_id") + TEXT_RESET + "\n" +
                             "------------------------------" + "\n";
             System.out.println(booked_id);
         } catch (Exception e) {
@@ -513,7 +515,7 @@ public class Database {
             resultSet = statement.executeQuery();
             String choice_id =
                     "------------------------------" + "\n" +
-                            "Additional choice ID: " + resultSet.getString("choice_id") + "\n" +
+                            "Additional choice ID: " + TEXT_GREEN + resultSet.getString("choice_id") + TEXT_RESET + "\n" +
                             "------------------------------" + "\n";
             System.out.println(choice_id);
         } catch (SQLException e) {

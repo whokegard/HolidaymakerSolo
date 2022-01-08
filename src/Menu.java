@@ -8,6 +8,8 @@ public class Menu {
     private Destination destination = new Destination();
     private Payment payment = new Payment();
     private Room room = new Room();
+    public static final String TEXT_GREEN = "\u001B[32m";
+    public static final String TEXT_RESET = "\u001B[0m";
 
     public Menu(){
         new Database();
@@ -20,7 +22,7 @@ public class Menu {
         password = Dialog.dialogString("Enter your password: ");
 
         if (username.equals("admin") && password.equals("admin")){
-            System.out.println("Login successful." + "\n");
+            System.out.println(TEXT_GREEN + "Login successful." + TEXT_RESET + "\n");
         }
         else{
             System.out.println("Username or password is invalid, try again." + "\n");
@@ -67,9 +69,7 @@ public class Menu {
                 } catch (Exception e){
                     e.printStackTrace();
                 }
-
         }
-
     }
 
     public void bookingMenu(){
