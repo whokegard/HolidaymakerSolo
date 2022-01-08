@@ -66,7 +66,6 @@ public class Booking {
             String meal_choice = Dialog.dialogString("Meal choice? (None/Half board/Full board)");
             String additional_bed = Dialog.dialogString("Additional bed? (Yes/No)");
             database.changeChoices(choice_id, room_id, booked_id, meal_choice, additional_bed);
-
         }
         catch(Exception e) {
             e.printStackTrace();

@@ -1,4 +1,3 @@
-
 public class Payment {
     private Database database = new Database();
     private Customer customer = new Customer();

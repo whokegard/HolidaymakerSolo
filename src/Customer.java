@@ -1,9 +1,6 @@
 public class Customer {
     private Database database = new Database();
 
-    public Customer() {
-    }
-
     public void searchCustomer(){
         try{
             String firstName = Dialog.dialogString("Customer first name: ");
@@ -55,26 +52,4 @@ public class Customer {
             e.printStackTrace();
         }
     }
-
-    public boolean addCustomerToBooking(){
-        int choice;
-        while (true) {
-            try {
-                choice = Dialog.dialog("Select choice:" + "\n" +
-                        "[1] Register new customer" + "\n" +
-                        "[2] Find existing customer");
-                if (choice == 1) {
-                    return false;
-                }
-                if (choice == 2) {
-                    return true;
-                } else {
-                    System.out.println("Please try again. ");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 }

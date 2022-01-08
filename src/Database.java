@@ -7,7 +7,6 @@ public class Database {
     public static final String TEXT_GREEN = "\u001B[32m";
     public static final String TEXT_RESET = "\u001B[0m";
 
-
     public Database() {
         connect();
     }
@@ -25,16 +24,13 @@ public class Database {
             statement = connection.prepareStatement("SELECT guest_booking_id, room_id, first_name, last_name, city, hotel_name, checkin_date, checkout_date FROM booked_guests\n" +
                     "WHERE first_name = ?\n" +
                     "AND last_name = ?\n");
-
             statement.setString(1, first_name);
             statement.setString(2, last_name);
-
             try {
                 resultSet = statement.executeQuery();
             } catch (SQLException e) {
                 System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
             }
-
             while (resultSet.next()) {
                 String bookedGuest =
                         "------------------------------" + "\n" +
@@ -475,7 +471,6 @@ public class Database {
             statement.setString(2, checkin_date);
             statement.setString(3, checkout_date);
             statement.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

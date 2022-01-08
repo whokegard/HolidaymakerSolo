@@ -20,7 +20,6 @@ public class Menu {
     private void adminLogin(){
         username = Dialog.dialogString("Enter your username: ");
         password = Dialog.dialogString("Enter your password: ");
-
         if (username.equals("admin") && password.equals("admin")){
             System.out.println(TEXT_GREEN + "Login successful." + TEXT_RESET + "\n");
         }
@@ -38,7 +37,6 @@ public class Menu {
                 "(4) Room menu." + "\n" +
                 "(5) Payment menu." + "\n" +
                 "(6) Exit." + "\n", 1, 6);
-
             while (running){
                 try{
                     switch(choice){
@@ -65,7 +63,6 @@ public class Menu {
                         default:
                             break;
                     }
-
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -81,7 +78,6 @@ public class Menu {
                 "(4) Search booking." + "\n" +
                 "(5) Back to main menu." + "\n" +
                 "(6) Exit." + "\n", 1, 6);
-
         while (running){
             try{
                 switch(choice){
@@ -127,7 +123,6 @@ public class Menu {
                 "(4) Search customer." + "\n" +
                 "(5) Back to main menu." + "\n" +
                 "(6) Exit." + "\n", 1, 6);
-
         while (running){
             try{
                 switch(choice){
@@ -213,7 +208,6 @@ public class Menu {
                 "(4) Order destinations by distance to beach." + "\n" +
                 "(5) Back to main menu." + "\n" +
                 "(6) Exit." + "\n", 1, 6);
-
         while (running){
             try{
                 switch(choice){
@@ -257,7 +251,6 @@ public class Menu {
                 "(2) Search room by max price." + "\n" +
                 "(3) Back to main menu." + "\n" +
                 "(4) Exit." + "\n", 1, 4);
-
         while (running){
             try{
                 switch(choice){

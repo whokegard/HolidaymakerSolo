@@ -1,9 +1,6 @@
 public class Destination {
     private Database database = new Database();
 
-    public Destination() {
-    }
-
     public void searchDestination(){
         try{
             database.showDestination();
