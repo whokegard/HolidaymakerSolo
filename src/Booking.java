@@ -16,14 +16,10 @@ public class Booking {
 
     public void addBooking() {
         try {
-            String room = Dialog.dialogString("Do you wanna browse rooms? (Yes/No)");
-            if (room.equals("Yes")){
-            database.showRooms();
-            }
-            else {
-                int room_id = Dialog.dialog("Room ID?");
                 String checkin_date = Dialog.dialogString("Check in date? (YYYY-MM-DD)");
-                String checkout_date = Dialog.dialogString("Check out date? (YYYY-MM-DD))");
+                String checkout_date = Dialog.dialogString("Check out date? (YYYY-MM-DD)");
+                database.showRoomsDate(checkin_date, checkout_date);
+                int room_id = Dialog.dialog("Room ID?");
                 database.addBookingRoom(room_id, checkin_date, checkout_date);
 
                 String meal = Dialog.dialogString("Meal choice? (None/Half board/Full board)");
@@ -37,7 +33,6 @@ public class Booking {
                     int choice_id = Dialog.dialog("Choice id?");
                     database.guestBooking(guestID, room_id, choice_id, booked_id, totalGuests);
                 }
-            }
         }
         catch(Exception e) {
             e.printStackTrace();

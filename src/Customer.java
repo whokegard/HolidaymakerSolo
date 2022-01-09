@@ -45,7 +45,7 @@ public class Customer {
             String last_name = Dialog.dialogString("Last name?");
             String email = Dialog.dialogString("Email?");
             String phonenumber = Dialog.dialogString("Phone number?");
-            String birthdate = Dialog.dialogString("Birthdate? (YYYY-MM-DD))");
+            String birthdate = Dialog.dialogString("Birthdate? (YYYY-MM-DD)");
             database.changeCustomer(id, first_name, last_name, email, phonenumber, birthdate);
         }
         catch(Exception e) {
