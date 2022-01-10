@@ -380,33 +380,15 @@ public class Database {
 
     public boolean showRoomsDate(String checkin_date, String checkout_date) {
         try {
-            statement = connection.prepareStatement("SELECT DISTINCT * FROM booked_rooms WHERE NOT ((? <= checkout_date AND ? >= checkin_date) OR (? <= checkout_date AND ? >= checkin_date)) GROUP BY room_number");
+            statement = connection.prepareStatement("SELECT * FROM booked_rooms \n" +
+                    "WHERE NOT (checkin_date BETWEEN ? AND ?) \n" +
+                    "AND NOT (checkout_date BETWEEN ? AND ?)\n" +
+                    "OR checkin_date IS NULL AND checkout_date IS NULL\n" +
+                    "GROUP BY room_number");
             statement.setString(1, checkin_date);
             statement.setString(2, checkin_date);
             statement.setString(3, checkout_date);
             statement.setString(4, checkout_date);
-            statement.executeQuery();
-            resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                String rooms =
-                        "------------------------------" + "\n" +
-                                "Room number: " + resultSet.getString("Room_number") + "\n" +
-                                "City: " + resultSet.getString("city") + "\n" +
-                                "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
-                                "Rating: " + resultSet.getString("rating") + "\n" +
-                                "Distance centrum: " + resultSet.getString("distance_centrum") + "\n" +
-                                "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
-                                "Room type: " + resultSet.getString("room_type") + "\n" +
-                                "Price per night: " + resultSet.getString("price_per_night") + "\n" +
-                                "Maximum guests: " + resultSet.getString("maximum_guests") + "\n" +
-                                "Restaurant: " + resultSet.getString("Restaurant") + "\n" +
-                                "Kids club: " + resultSet.getString("kids_club") + "\n" +
-                                "Pool: " + resultSet.getString("pool") + "\n" +
-                                "Entertainment: " + resultSet.getString("entertainment") + "\n" +
-                                "------------------------------" + "\n";
-                System.out.println(rooms);
-            }
-            statement = connection.prepareStatement("SELECT * FROM booked_rooms WHERE checkin_date IS NULL AND checkout_date IS NULL");
             statement.executeQuery();
             resultSet = statement.executeQuery();
             while (resultSet.next()) {

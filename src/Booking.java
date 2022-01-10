@@ -1,6 +1,3 @@
-import javax.print.attribute.standard.DialogOwner;
-import java.awt.geom.NoninvertibleTransformException;
-
 public class Booking {
     private Database database = new Database();
     private Customer customer = new Customer();

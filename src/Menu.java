@@ -10,6 +10,7 @@ public class Menu {
     private Room room = new Room();
     public static final String TEXT_GREEN = "\u001B[32m";
     public static final String TEXT_RESET = "\u001B[0m";
+    public static final String TEXT_RED = "\u001B[31m";
 
     public Menu(){
         new Database();
@@ -24,7 +25,7 @@ public class Menu {
             System.out.println(TEXT_GREEN + "Login successful." + TEXT_RESET + "\n");
         }
         else{
-            System.out.println("Username or password is invalid, try again." + "\n");
+            System.out.println(TEXT_RED + "Username or password is invalid, try again." + TEXT_RESET + "\n");
             adminLogin();
         }
     }
