@@ -387,7 +387,8 @@ public class Database {
     public boolean showRoomsDate(String checkin_date, String checkout_date) {
         try {
             statement = connection.prepareStatement("SELECT * FROM booked_rooms \n" +
-                    "WHERE NOT (checkin_date BETWEEN ? AND ?) \n" +
+                    "WHERE room_number NOT IN (SELECT room_number FROM booked_rooms WHERE\n" +
+                    "checkin_date BETWEEN ? AND ?) \n" +
                     "AND NOT (checkout_date BETWEEN ? AND ?)\n" +
                     "OR checkin_date IS NULL AND checkout_date IS NULL\n" +
                     "GROUP BY room_number");
