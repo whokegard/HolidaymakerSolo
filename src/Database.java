@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class Database {
-    private Connection connection = null;
+    private static Connection connection = null;
     private PreparedStatement statement;
     private ResultSet resultSet;
     public static final String TEXT_GREEN = "\u001B[32m";
@@ -13,12 +13,18 @@ public class Database {
         connect();
     }
 
-    public void connect() {
+    public static Connection connect() {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:HolidaymakerSolo.sqlite");
+            if (connection == null) {
+                connection = DriverManager.getConnection("jdbc:sqlite:HolidaymakerSolo.sqlite");
+            } else{
+                connection.close();
+                connection = DriverManager.getConnection("jdbc:sqlite:HolidaymakerSolo.sqlite");
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return connection;
     }
 
     public boolean searchBookedGuest(String first_name, String last_name) {
