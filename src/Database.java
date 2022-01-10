@@ -6,6 +6,8 @@ public class Database {
     private ResultSet resultSet;
     public static final String TEXT_GREEN = "\u001B[32m";
     public static final String TEXT_RESET = "\u001B[0m";
+    public int booked_id;
+    public int choice_id;
 
     public Database() {
         connect();
@@ -537,11 +539,7 @@ public class Database {
         statement.setString(2, checkin_date);
         statement.setString(3, checkout_date);
         resultSet = statement.executeQuery();
-            String booked_id =
-                    "------------------------------" + "\n" +
-                            "Booking ID: " + TEXT_GREEN + resultSet.getString("booked_id") + TEXT_RESET + "\n" +
-                            "------------------------------" + "\n";
-            System.out.println(booked_id);
+            booked_id = resultSet.getInt("booked_id");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -565,11 +563,7 @@ public class Database {
             statement.setString(3, meal_choice);
             statement.setString(4, additional_bed);
             resultSet = statement.executeQuery();
-            String choice_id =
-                    "------------------------------" + "\n" +
-                            "Additional choice ID: " + TEXT_GREEN + resultSet.getString("choice_id") + TEXT_RESET + "\n" +
-                            "------------------------------" + "\n";
-            System.out.println(choice_id);
+            choice_id = resultSet.getInt("choice_ID");
         } catch (SQLException e) {
             System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
         }

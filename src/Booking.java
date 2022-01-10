@@ -3,6 +3,7 @@ import java.awt.geom.NoninvertibleTransformException;
 
 public class Booking {
     private Database database = new Database();
+    private Customer customer = new Customer();
     private String meal;
     private String bed;
     public static final String TEXT_GREEN = "\u001B[32m";
@@ -28,7 +29,6 @@ public class Booking {
                 database.showRoomsDate(checkin_date, checkout_date);
                 int room_id = Dialog.dialog("Room ID?");
                 database.addBookingRoom(room_id, checkin_date, checkout_date);
-
                 int mealChoice = Dialog.dialog("Meal choice?" + "\n" +
                         "(1) None." + "\n" +
                         "(2) Half board." + "\n" +
@@ -42,7 +42,7 @@ public class Booking {
                 if(mealChoice == 3){
                 meal = "Full board";
                 }
-            int becChoice = Dialog.dialog("Bed choice?" + "\n" +
+            int becChoice = Dialog.dialog("Additional bed?" + "\n" +
                     "(1) Yes." + "\n" +
                     "(2) No." + "\n", 1, 2);
             if(becChoice == 1){
@@ -51,13 +51,28 @@ public class Booking {
             if(becChoice == 2){
                 bed = "No";
             }
-                int booked_id = Dialog.dialog("Book id?");
+                int booked_id = database.booked_id;
                 database.addAdditionalChoices(room_id, booked_id, meal, bed);
-
+                boolean running = true;
+                while(running){
+                    int searchGuest = Dialog.dialog("Search or register new guest?" + "\n" +
+                            "(1) Search Guest." + "\n" +
+                            "(2) Register new Guest." + "\n" +
+                            "(3) No." + "\n", 1, 3);
+                    if(searchGuest == 1){
+                        customer.searchCustomer();
+                    }
+                    if(searchGuest == 2){
+                        customer.addCustomer();
+                    }
+                    if(searchGuest == 3){
+                        running = false;
+                    }
+                }
                 int totalGuests = Dialog.dialog("How many guests?");
                 for (int i = 0; i < totalGuests; i++) {
                     int guestID = Dialog.dialog("Guest id?");
-                    int choice_id = Dialog.dialog("Choice id?");
+                    int choice_id = database.choice_id;
                     database.guestBooking(guestID, room_id, choice_id, booked_id, totalGuests);
                     System.out.println(TEXT_GREEN + "Booking added." + TEXT_RESET);
                 }
