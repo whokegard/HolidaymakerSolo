@@ -7,7 +7,6 @@ public class Payment {
             customer.searchCustomer();
             int guest_id = Dialog.dialog("Customer ID?");
             database.getTotalPrice(guest_id);
-
         }
         catch (Exception e){
             e.printStackTrace();
@@ -31,5 +30,4 @@ public class Payment {
             e.printStackTrace();
         }
     }
-
 }

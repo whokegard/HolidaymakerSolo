@@ -557,7 +557,6 @@ public class Database {
         }
     }
 
-
     public void getTotalPrice(int guest_id){
         try {
             statement = connection.prepareStatement("SELECT guest_id, book_id, full_name, city, hotel_name, total_price FROM total_price_working\n" +
