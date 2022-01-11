@@ -6,9 +6,8 @@ public class Payment {
         try{
             customer.searchCustomer();
             int guest_id = Dialog.dialog("Customer ID?");
-            if (!database.getTotalPrice(guest_id)) {
-                System.out.println("Couldn't find a customer with id: " + guest_id);
-            }
+            database.getTotalPrice(guest_id);
+
         }
         catch (Exception e){
             e.printStackTrace();

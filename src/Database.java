@@ -558,16 +558,13 @@ public class Database {
     }
 
 
-    public boolean getTotalPrice(int guest_id){
+    public void getTotalPrice(int guest_id){
         try {
             statement = connection.prepareStatement("SELECT guest_id, book_id, full_name, city, hotel_name, total_price FROM total_price_working\n" +
                     "WHERE guest_id = ?");
             statement.setInt(1, guest_id);
-            try {
-                resultSet = statement.executeQuery();
-            } catch (SQLException e) {
-                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
-            }
+            resultSet = statement.executeQuery();
+            boolean priceSearch = false;
             while (resultSet.next()) {
                 String customer =
                         "------------------------------" + "\n" +
@@ -578,12 +575,14 @@ public class Database {
                                 "Total price: " + resultSet.getString("total_price") + "\n" +
                                 "------------------------------" + "\n";
                 System.out.println(customer);
+                priceSearch = true;
             }
-            return true;
+            if(!priceSearch){
+                System.out.println("Couldn't find a customer with that " + guest_id + ".");
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return false;
     }
 }
