@@ -384,18 +384,20 @@ public class Database {
         return false;
     }
 
-    public boolean showRoomsDate(String checkin_date, String checkout_date) {
+    public boolean showRoomsDate(String checkin_date, String checkout_date, int hotel_id) {
         try {
             statement = connection.prepareStatement("SELECT * FROM booked_rooms \n" +
                     "WHERE room_number NOT IN (SELECT room_number FROM booked_rooms WHERE\n" +
                     "checkin_date BETWEEN ? AND ?) \n" +
-                    "AND NOT (checkout_date BETWEEN ? AND ?)\n" +
-                    "OR checkin_date IS NULL AND checkout_date IS NULL\n" +
+                    "AND NOT (checkout_date BETWEEN ? AND ?) AND hotel_number = ?\n" +
+                    "OR checkin_date IS NULL AND checkout_date IS NULL AND hotel_number = ?\n" +
                     "GROUP BY room_number");
             statement.setString(1, checkin_date);
             statement.setString(2, checkin_date);
             statement.setString(3, checkout_date);
             statement.setString(4, checkout_date);
+            statement.setInt(5, hotel_id);
+            statement.setInt(6, hotel_id);
             statement.executeQuery();
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
