@@ -132,7 +132,7 @@ public class Database {
         }
         try {
             statement = connection.prepareStatement("INSERT INTO payments (book_id, full_name, total_price) SELECT book_id, full_name, total_price FROM total_price_working");
-            System.out.println("Payments updated." + "\n");
+            System.out.println(TEXT_GREEN + "Payments updated." + TEXT_RESET + "\n");
             statement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -212,7 +212,7 @@ public class Database {
                                 "Restaurant: " + resultSet.getString("restaurant") + "\n" +
                                 "Kids club: " + resultSet.getString("kids_club") + "\n" +
                                 "Entertainment: " + resultSet.getString("entertainment") + "\n" +
-                                "Rating: " + resultSet.getString("rating") + "\n" +
+                               TEXT_GREEN + "Rating: " + resultSet.getString("rating") + TEXT_RESET + "\n" +
                                 "Distance centre: " + resultSet.getString("distance_centre") + "\n" +
                                 "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
                                 "Amount of rooms: " + resultSet.getString("number_of_rooms") + "\n" +
@@ -244,7 +244,7 @@ public class Database {
                                 "Kids club: " + resultSet.getString("kids_club") + "\n" +
                                 "Entertainment: " + resultSet.getString("entertainment") + "\n" +
                                 "Rating: " + resultSet.getString("rating") + "\n" +
-                                "Distance centre: " + resultSet.getString("distance_centre") + "\n" +
+                                TEXT_GREEN + "Distance centre: " + resultSet.getString("distance_centre") + TEXT_RESET + "\n" +
                                 "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
                                 "Amount of rooms: " + resultSet.getString("number_of_rooms") + "\n" +
                                 "------------------------------" + "\n";
@@ -276,7 +276,7 @@ public class Database {
                                 "Entertainment: " + resultSet.getString("entertainment") + "\n" +
                                 "Rating: " + resultSet.getString("rating") + "\n" +
                                 "Distance centre: " + resultSet.getString("distance_centre") + "\n" +
-                                "Distance beach: " + resultSet.getString("distance_beach") + "\n" +
+                                TEXT_GREEN + "Distance beach: " + resultSet.getString("distance_beach") + TEXT_RESET + "\n" +
                                 "Amount of rooms: " + resultSet.getString("number_of_rooms") + "\n" +
                                 "------------------------------" + "\n";
                 System.out.println(destination);

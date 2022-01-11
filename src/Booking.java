@@ -39,13 +39,13 @@ public class Booking {
                 if(mealChoice == 3){
                 meal = "Full board";
                 }
-            int becChoice = Dialog.dialog("Additional bed?" + "\n" +
+            int bedChoice = Dialog.dialog("Additional bed?" + "\n" +
                     "(1) Yes." + "\n" +
                     "(2) No." + "\n", 1, 2);
-            if(becChoice == 1){
+            if(bedChoice == 1){
                 bed = "Yes";
             }
-            if(becChoice == 2){
+            if(bedChoice == 2){
                 bed = "No";
             }
                 int booked_id = database.booked_id;
