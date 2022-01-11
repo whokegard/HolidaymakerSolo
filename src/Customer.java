@@ -5,10 +5,8 @@ public class Customer {
         try{
             String firstName = Dialog.dialogString("Customer first name: ");
             String lastName = Dialog.dialogString("Customer last name: ");
-            if (!database.searchCustomer(firstName, lastName)) {
-                System.out.println("Couldn't find a customer named " + firstName + " " + lastName + ".");
+            database.searchCustomer(firstName, lastName);
             }
-        }
         catch (Exception e){
             e.printStackTrace();
         }

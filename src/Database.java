@@ -27,51 +27,47 @@ public class Database {
         return connection;
     }
 
-    public boolean searchBookedGuest(String first_name, String last_name) {
+    public void searchBookedGuest(String first_name, String last_name) {
         try {
             statement = connection.prepareStatement("SELECT guest_booking_id, room_id, first_name, last_name, city, hotel_name, checkin_date, checkout_date FROM booked_guests\n" +
                     "WHERE first_name = ?\n" +
                     "AND last_name = ?\n");
             statement.setString(1, first_name);
             statement.setString(2, last_name);
-            try {
-                resultSet = statement.executeQuery();
-            } catch (SQLException e) {
-                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
-            }
-            while (resultSet.next()) {
-                String bookedGuest =
-                        "------------------------------" + "\n" +
-                                "Booking ID: " + resultSet.getString("guest_booking_id") + "\n" +
-                                "Room ID: " + resultSet.getString("room_id") + "\n" +
-                                "City: " + resultSet.getString("city") + "\n" +
-                                "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
-                                "First name: " + resultSet.getString("first_name") + "\n" +
-                                "Last name: " + resultSet.getString("last_name") + "\n" +
-                                "Check in date: " + resultSet.getString("checkin_date") + "\n" +
-                                "Check out date: " + resultSet.getString("checkout_date") + "\n" +
-                                "------------------------------" + "\n";
-                System.out.println(bookedGuest);
-            }
-            return true;
-        } catch (Exception ex) {
+            resultSet = statement.executeQuery();
+            boolean searchCustomer =  false;
+                while (resultSet.next()) {
+                    String bookedGuest =
+                            "------------------------------" + "\n" +
+                                    "Booking ID: " + resultSet.getString("guest_booking_id") + "\n" +
+                                    "Room ID: " + resultSet.getString("room_id") + "\n" +
+                                    "City: " + resultSet.getString("city") + "\n" +
+                                    "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
+                                    "First name: " + resultSet.getString("first_name") + "\n" +
+                                    "Last name: " + resultSet.getString("last_name") + "\n" +
+                                    "Check in date: " + resultSet.getString("checkin_date") + "\n" +
+                                    "Check out date: " + resultSet.getString("checkout_date") + "\n" +
+                                    "------------------------------" + "\n";
+                    System.out.println(bookedGuest);
+                    searchCustomer = true;
+                }
+            if (!searchCustomer) {
+                    System.out.println("Couldn't find a customer named " + first_name + " " + last_name + "." + "\n");
+                }
+        } catch(Exception ex){
             ex.printStackTrace();
         }
-        return false;
     }
 
-    public boolean searchCustomer(String first_name, String last_name) {
+    public void searchCustomer(String first_name, String last_name) {
         try {
             statement = connection.prepareStatement("SELECT id, first_name, last_name, email, phonenumber, birthdate FROM guest_information\n" +
                     "WHERE first_name = ?\n" +
                     "AND last_name = ?\n");
             statement.setString(1, first_name);
             statement.setString(2, last_name);
-            try {
-                resultSet = statement.executeQuery();
-            } catch (SQLException e) {
-                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
-            }
+            resultSet = statement.executeQuery();
+            boolean searchCustomer =  false;
             while (resultSet.next()) {
                 String customer =
                         "------------------------------" + "\n" +
@@ -83,13 +79,14 @@ public class Database {
                                 "Birthdate: " + resultSet.getString("birthdate") + "\n" +
                                 "------------------------------" + "\n";
                 System.out.println(customer);
+                searchCustomer = true;
             }
-            return true;
-
+            if(!searchCustomer){
+                System.out.println("Couldn't find a customer named " + first_name + " " + last_name + "."+ "\n");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return false;
     }
 
     public void newCustomer(String first_name, String last_name, String email, String phonenumber, String birthdate) {

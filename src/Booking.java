@@ -11,9 +11,7 @@ public class Booking {
         try{
             String firstName = Dialog.dialogString("Customer first name: ");
             String lastName = Dialog.dialogString("Customer last name: ");
-            if (!database.searchBookedGuest(firstName, lastName)) {
-                System.out.println("Couldn't find a customer named " + firstName + " " + lastName + ".");
-            }
+            database.searchBookedGuest(firstName, lastName);
         }
         catch (Exception e){
             e.printStackTrace();
