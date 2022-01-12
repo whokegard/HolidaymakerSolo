@@ -1,0 +1,14 @@
+Ta bort kund:
+DELETE FROM customer WHERE customer.first_name = ?;
+
+Lägg till kund:
+insert into customer (first_name, last_name, email, phone, birthdate) 
+values ('First Name', 'Last Name', 'email', '000-000-0000', '0000-00-00');
+
+Lägg till bokning:
+insert into booking (customer_id_responsible, check_in_date, check_out_date) 
+values ('id', 'YYYY-MM-DD', 'YYYY-MM-DD');
+
+Ta bort bokning:
+DELETE FROM booking WHERE booking.booking_id = ?;
+
