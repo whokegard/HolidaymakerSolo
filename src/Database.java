@@ -29,7 +29,7 @@ public class Database {
 
     public void searchBookedGuest(String first_name, String last_name) {
         try {
-            statement = connection.prepareStatement("SELECT guest_booking_id, room_id, first_name, last_name, city, hotel_name, checkin_date, checkout_date FROM booked_guests\n" +
+            statement = connection.prepareStatement("SELECT guest_booking_id, room_id, choice_id, first_name, last_name, city, hotel_name, checkin_date, checkout_date FROM booked_guests\n" +
                     "WHERE first_name = ?\n" +
                     "AND last_name = ?\n");
             statement.setString(1, first_name);
@@ -41,6 +41,7 @@ public class Database {
                             "------------------------------" + "\n" +
                                     "Booking ID: " + resultSet.getString("guest_booking_id") + "\n" +
                                     "Room ID: " + resultSet.getString("room_id") + "\n" +
+                                    "Choice ID: " + resultSet.getString("choice_id") + "\n" +
                                     "City: " + resultSet.getString("city") + "\n" +
                                     "Hotel name: " + resultSet.getString("hotel_name") + "\n" +
                                     "First name: " + resultSet.getString("first_name") + "\n" +
@@ -491,15 +492,34 @@ public class Database {
         }
     }
 
-    public void changeChoices(int choice_id, int room_id, int booked_id, String meal_choice, String additional_bed) {
+    public void changeChoices(int choice_id, int room_id, int booked_id, String mealChoice, String bedChoice) {
         try {
             statement = connection.prepareStatement("UPDATE additional_choices set room_id = ?, booked_dates_id = ?, meal_choice = ?, additional_bed = ? WHERE choice_id = ?");
             statement.setInt(1, room_id);
             statement.setInt(2, booked_id);
-            statement.setString(3, meal_choice);
-            statement.setString(4, additional_bed);
+            statement.setString(3, mealChoice);
+            statement.setString(4, bedChoice);
             statement.setInt(5, choice_id);
             System.out.println("Choices for " + choice_id +  " updated. " + "\n");
+            try {
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("Error message: " + "\n" + e.getMessage() + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeGuest(int guestID, int room_id, int choice_id, int booked_id, int totalGuests) {
+        try {
+            statement = connection.prepareStatement("UPDATE guest_bookings set room_id = ?, additional_choices_id = ?, booked_dates_id = ?, total_guests = ? WHERE guests_id = ?");
+            statement.setInt(1, room_id);
+            statement.setInt(2, choice_id);
+            statement.setInt(3, booked_id);
+            statement.setInt(4, totalGuests);
+            statement.setInt(5, guestID);
+            System.out.println("Booking for " + guestID +  " updated. " + "\n");
             try {
                 statement.executeUpdate();
             } catch (SQLException e) {

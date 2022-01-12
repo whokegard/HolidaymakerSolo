@@ -115,15 +115,57 @@ public class Booking {
 
     public void updateBooking() {
         try {
+            searchBooking();
             int booked_id = Dialog.dialog("Booking ID?");
             int room_id = Dialog.dialog("Room ID?");
             String checkin_date = Dialog.dialogString("Check-in date? (YYYY-MM-DD)");
             String checkout_date = Dialog.dialogString("Check-out date? (YYYY-MM-DD)");
             database.changeBooking(booked_id, room_id, checkin_date, checkout_date);
             int choice_id = Dialog.dialog("Choice ID?");
-            String meal_choice = Dialog.dialogString("Meal choice? (None/Half board/Full board)");
-            String additional_bed = Dialog.dialogString("Additional bed? (Yes/No)");
-            database.changeChoices(choice_id, room_id, booked_id, meal_choice, additional_bed);
+            int mealChoice = Dialog.dialog("Meal choice?" + "\n" +
+                    "(1) None." + "\n" +
+                    "(2) Half board." + "\n" +
+                    "(3) Full board." + "\n", 1, 3);
+            if (mealChoice == 1) {
+                meal = "None";
+            }
+            if (mealChoice == 2) {
+                meal = "Half board";
+            }
+            if (mealChoice == 3) {
+                meal = "Full board";
+            }
+            int bedChoice = Dialog.dialog("Additional bed?" + "\n" +
+                    "(1) Yes." + "\n" +
+                    "(2) No." + "\n", 1, 2);
+            if (bedChoice == 1) {
+                bed = "Yes";
+            }
+            if (bedChoice == 2) {
+                bed = "No";
+            }
+            database.changeChoices(choice_id, room_id, booked_id, meal, bed);
+            boolean running = true;
+            while (running) {
+                int searchGuest = Dialog.dialog("Search or register new guest?" + "\n" +
+                        "(1) Search Guest." + "\n" +
+                        "(2) Register new Guest." + "\n" +
+                        "(3) No." + "\n", 1, 3);
+                if (searchGuest == 1) {
+                    customer.searchCustomer();
+                }
+                if (searchGuest == 2) {
+                    customer.addCustomer();
+                }
+                if (searchGuest == 3) {
+                    running = false;
+                }
+            }
+                int totalGuests = Dialog.dialog("How many guests?");
+                for (int i = 0; i < totalGuests; i++) {
+                    int guestID = Dialog.dialog("Guest id?");
+                    database.changeGuest(guestID, room_id, choice_id, booked_id, totalGuests);
+                }
         }
         catch(Exception e) {
             e.printStackTrace();
